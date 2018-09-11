@@ -95,14 +95,14 @@ Overall, caching should look something like this :
 
 from __future__ import print_function
 
-from .config import NETWORK_PROXY_TYPE
-from .config import NETWORK_PROXY_IP
-from .config import NETWORK_PROXY_PORT
-from .config import NETWORK_PROXY_USER
-from .config import NETWORK_PROXY_PASS
+from tendril.utils.config import NETWORK_PROXY_TYPE
+from tendril.utils.config import NETWORK_PROXY_IP
+from tendril.utils.config import NETWORK_PROXY_PORT
+from tendril.utils.config import NETWORK_PROXY_USER
+from tendril.utils.config import NETWORK_PROXY_PASS
 
-from .config import ENABLE_REDIRECT_CACHING
-from .config import INSTANCE_CACHE
+from tendril.utils.config import ENABLE_REDIRECT_CACHING
+from tendril.utils.config import INSTANCE_CACHE
 
 from bs4 import BeautifulSoup
 
