@@ -14,7 +14,7 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements = [
-    'tendril-utils-core',
+    'tendril-utils-core>=0.1.4',
     'six',
     'lxml',
     'beautifulsoup4',
@@ -30,7 +30,7 @@ test_requirements = [
 
 setup(
     name='tendril-utils-www',
-    version='0.1.1',
+    version='0.1.2',
     description="Internet utilities for tendril",
     long_description=readme,
     author="Chintalagiri Shashank",

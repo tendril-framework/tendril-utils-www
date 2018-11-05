@@ -167,6 +167,8 @@ SOAP_CACHE = os.path.join(INSTANCE_CACHE, 'soapcache')
 
 _internet_connected = False
 
+__version__ = '0.1.2'
+
 
 def _get_http_proxy_url():
     """
@@ -222,6 +224,10 @@ try:
     with open(REDIR_CACHE_FILE, "rb") as rdcf:
         redirect_cache = pickle.load(rdcf)
     logger.info('Loaded Redirect Cache from file')
+except EOFError:
+    os.remove(REDIR_CACHE_FILE)
+    redirect_cache = {}
+    logger.warning('Discarded Corrupt Redirect Cache')
 except IOError:
     redirect_cache = {}
     logger.info('Created new Redirect Cache')
