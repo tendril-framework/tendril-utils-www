@@ -34,22 +34,22 @@ proxies and caching is implemented.
     get_soap_client
 
 This module uses the following configuration values from
-:mod:`tendril.utils.config`:
+:mod:`tendril.config.legacy`:
 
 .. rubric:: Network Proxy Settings
 
-- :data:`tendril.utils.config.NETWORK_PROXY_TYPE`
-- :data:`tendril.utils.config.NETWORK_PROXY_IP`
-- :data:`tendril.utils.config.NETWORK_PROXY_PORT`
-- :data:`tendril.utils.config.NETWORK_PROXY_USER`
-- :data:`tendril.utils.config.NETWORK_PROXY_PASS`
+- :data:`tendril.config.legacy.NETWORK_PROXY_TYPE`
+- :data:`tendril.config.legacy.NETWORK_PROXY_IP`
+- :data:`tendril.config.legacy.NETWORK_PROXY_PORT`
+- :data:`tendril.config.legacy.NETWORK_PROXY_USER`
+- :data:`tendril.config.legacy.NETWORK_PROXY_PASS`
 
 .. rubric:: Caching
 
-- :data:`tendril.utils.config.ENABLE_REDIRECT_CACHING`
+- :data:`tendril.config.legacy.ENABLE_REDIRECT_CACHING`
   Whether or not redirect caching should be used.
 
-- :data:`tendril.utils.config.MAX_AGE_DEFAULT`
+- :data:`tendril.config.legacy.MAX_AGE_DEFAULT`
   The default max age to use with all www caching methods which
   support cache expiry.
 
@@ -95,14 +95,14 @@ Overall, caching should look something like this :
 
 from __future__ import print_function
 
-from tendril.utils.config import NETWORK_PROXY_TYPE
-from tendril.utils.config import NETWORK_PROXY_IP
-from tendril.utils.config import NETWORK_PROXY_PORT
-from tendril.utils.config import NETWORK_PROXY_USER
-from tendril.utils.config import NETWORK_PROXY_PASS
+from tendril.config.legacy import NETWORK_PROXY_TYPE
+from tendril.config.legacy import NETWORK_PROXY_IP
+from tendril.config.legacy import NETWORK_PROXY_PORT
+from tendril.config.legacy import NETWORK_PROXY_USER
+from tendril.config.legacy import NETWORK_PROXY_PASS
 
-from tendril.utils.config import ENABLE_REDIRECT_CACHING
-from tendril.utils.config import INSTANCE_CACHE
+from tendril.config.legacy import ENABLE_REDIRECT_CACHING
+from tendril.config.legacy import INSTANCE_CACHE
 
 from bs4 import BeautifulSoup
 
@@ -140,7 +140,7 @@ from fs.opener import fsopendir
 from fs.utils import copyfile
 from fs.osfs import OSFS
 from tendril.utils.fsutils import temp_fs
-from tendril.utils.config import MAX_AGE_DEFAULT
+from tendril.config.legacy import MAX_AGE_DEFAULT
 from tendril.utils import log
 logger = log.get_logger(__name__, log.WARNING)
 
@@ -173,12 +173,12 @@ __version__ = '0.1.2'
 def _get_http_proxy_url():
     """
     Constructs the proxy URL for HTTP proxies from relevant
-    :mod:`tendril.utils.config` Config options, and returns the URL string
+    :mod:`tendril.config.legacy` Config options, and returns the URL string
     in the form:
 
         ``http://[NP_USER:NP_PASS@]NP_IP[:NP_PORT]``
 
-    where NP_xxx is obtained from the :mod:`tendril.utils.config` ConfigOption
+    where NP_xxx is obtained from the :mod:`tendril.config.legacy` ConfigOption
     NETWORK_PROXY_xxx.
     """
     if NETWORK_PROXY_USER is None:
@@ -588,7 +588,7 @@ class WWWCachedFetcher(CacheBase):
 
 #: The module's :class:`WWWCachedFetcher` instance which should be
 #: used whenever cached results are desired. The cache is stored in
-#: the directory defined by :data:`tendril.utils.config.WWW_CACHE`.
+#: the directory defined by :data:`tendril.config.legacy.WWW_CACHE`.
 cached_fetcher = WWWCachedFetcher(cache_dir=WWW_CACHE)
 
 
@@ -630,7 +630,7 @@ _proxy_dict = _get_proxy_dict()
 #: The module's :class:`cachecontrol.caches.FileCache` instance which
 #: should be used whenever cached :mod:`requests` responses are desired.
 #: The cache is stored in the directory defined by
-#: :data:`tendril.utils.config.REQUESTS_CACHE`.
+#: :data:`tendril.config.legacy.REQUESTS_CACHE`.
 #: This cache uses very weak permissions. These should probably be
 #: fine tuned.
 requests_cache = FileCache(REQUESTS_CACHE, filemode=0o666, dirmode=0o777)
