@@ -102,7 +102,7 @@ from tendril.config.legacy import NETWORK_PROXY_USER
 from tendril.config.legacy import NETWORK_PROXY_PASS
 
 from tendril.config.legacy import ENABLE_REDIRECT_CACHING
-from tendril.config.legacy import INSTANCE_CACHE
+from tendril.config import INSTANCE_CACHE
 
 from bs4 import BeautifulSoup
 
