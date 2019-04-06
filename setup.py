@@ -15,7 +15,7 @@ with open('README.rst') as readme_file:
 
 requirements = [
     'tendril-utils-core>=0.1.11',
-    'tendril-config>=0.1.4',
+    'tendril-config>=0.1.6',
     'six',
     'lxml',
     'beautifulsoup4',
