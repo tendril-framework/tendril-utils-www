@@ -386,7 +386,7 @@ class CacheBase(object):
         with file encoding on a somewhat case-by-case basis, until the
         overall encoding problems can be ironed out.
         """
-        self.cache_fs = fsopendir(cache_dir)
+        self.cache_fs = fsopendir(cache_dir, create_dir=True)
 
     def _get_filepath(self, *args, **kwargs):
         """

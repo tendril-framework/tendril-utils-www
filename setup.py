@@ -38,7 +38,7 @@ test_requirements = [
 
 setup(
     name='tendril-utils-www',
-    version='0.1.7',
+    version='0.1.8',
     description="Internet utilities for tendril",
     long_description=readme,
     author="Chintalagiri Shashank",
