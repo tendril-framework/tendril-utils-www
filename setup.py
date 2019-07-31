@@ -21,7 +21,7 @@ requirements = [
     'beautifulsoup4',
     'cachecontrol[filecache]',
     'requests',
-    'suds',
+    'suds-py3',
     'fs==0.5.4',
 ]
 
@@ -31,7 +31,7 @@ test_requirements = [
 
 setup(
     name='tendril-utils-www',
-    version='0.1.5',
+    version='0.1.6',
     description="Internet utilities for tendril",
     long_description=readme,
     author="Chintalagiri Shashank",
