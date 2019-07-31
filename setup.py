@@ -13,6 +13,13 @@ except ImportError:
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
+import sys
+if sys.version_info > (3, 0):
+    suds = 'suds-py3'
+else:
+    suds = 'suds'
+
+
 requirements = [
     'tendril-utils-core>=0.1.12',
     'tendril-config>=0.1.6',
@@ -21,7 +28,7 @@ requirements = [
     'beautifulsoup4',
     'cachecontrol[filecache]',
     'requests',
-    'suds-py3',
+    suds,
     'fs==0.5.4',
 ]
 
