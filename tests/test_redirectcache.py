@@ -22,12 +22,8 @@
 Docstring for test_utils_www
 """
 
-import six
 from tendril.utils.www import redirectcache
 from tendril.utils.www.bare import urlopen
-from hashlib import md5
-import pytest
-from six.moves.urllib.error import HTTPError, URLError
 redirectcache.DUMP_REDIR_CACHE_ON_EXIT = False
 
 
@@ -58,26 +54,3 @@ def test_disabled_redirect_caching():
     assert result.status == 301
     newtarget = redirectcache.get_actual_url('https://jigsaw.w3.org/HTTP/300/301.html')
     assert newtarget == 'https://jigsaw.w3.org/HTTP/300/301.html'
-
-
-def test_cached_fetcher():
-    test_url = 'http://www.google.com'
-    if six.PY3:
-        filepath = md5(test_url.encode('utf-8')).hexdigest()
-    else:
-        filepath = md5(test_url).hexdigest()
-    fs = www.cached_fetcher.cache_fs
-    if fs.exists(filepath):
-        fs.remove(filepath)
-    soup = www.get_soup('http://www.google.com')
-    assert soup is not None
-    assert fs.exists(filepath)
-
-
-def test_www_errors():
-    with pytest.raises(HTTPError):
-        www.get_soup('http://httpstat.us/404')
-    with pytest.raises(URLError):
-        www.get_soup('httpd://httpstat.us/404')
-    result = www.urlopen('http://httpstat.us/500')
-    assert result is None
