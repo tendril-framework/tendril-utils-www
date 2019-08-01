@@ -12,12 +12,14 @@
 .. image:: https://img.shields.io/coveralls/github/tendril-framework/tendril-utils-www.svg?logo=coveralls
     :target: https://coveralls.io/github/tendril-framework/tendril-utils-www
 
+.. image:: https://img.shields.io/codacy/grade/c72090d9e83648d8b7c1c52e3d502da6?logo=codacy
+    :target: https://www.codacy.com/app/chintal/tendril-utils-www
+
 .. image:: https://img.shields.io/requires/github/tendril-framework/tendril-utils-www.svg
     :target: https://requires.io/github/tendril-framework/tendril-utils-www/requirements
 
 .. image:: https://img.shields.io/pypi/l/tendril-utils-www.svg
     :target: https://www.gnu.org/licenses/agpl-3.0.en.html
-
 
 
 .. inclusion-marker-do-not-remove
