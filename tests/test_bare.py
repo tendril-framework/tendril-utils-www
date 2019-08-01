@@ -50,5 +50,5 @@ def test_www_errors():
         bare.get_soup('http://httpstat.us/404')
     with pytest.raises(URLError):
         bare.get_soup('httpd://httpstat.us/404')
-    result = bare.urlopen('http://httpstat.us/500')
-    assert result is None
+    with pytest.raises(HTTPError):
+        bare.get_soup('http://httpstat.us/500')
