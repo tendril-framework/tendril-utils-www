@@ -73,28 +73,6 @@ entirely in the future.
 This is a more typical kind of caching, which uses a backend-dependent
 mechanism to maintain a cache of full responses received.
 
-
-WWW Access Backends
--------------------
-
-.. toctree::
-
-   tendril.utils.www.bare
-   tendril.utils.www.req
-   tendril.utils.www.soap
-
-
-Other WWW Utilities and Backend Helpers
----------------------------------------
-
-.. toctree::
-
-   tendril.utils.www.helpers
-   tendril.utils.www.caching
-   tendril.utils.www.redirectcache
-   tendril.utils.www.status
-
-
 .. todo::
     Consider replacing uses of urllib/urllib2 backend with
     :mod:`requests` and simplify this module. Currently, the
