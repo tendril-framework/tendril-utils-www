@@ -135,7 +135,7 @@ class CachedTransport(CacheBase, HttpAuthenticated):
 
         """
         keystring = request.url + request.message
-        if six.PY3 or (six.PY2 and isinstance(keystring, unicode)):
+        if six.PY3 or (six.PY2 and isinstance(keystring, unicode)):  # noqa
             filepath = md5(keystring.encode('utf-8')).hexdigest()
         else:
             filepath = md5(keystring).hexdigest()

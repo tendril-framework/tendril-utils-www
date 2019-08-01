@@ -198,10 +198,10 @@ class CacheBase(object):
                     os.chmod(self.cache_fs.getsyspath(filepath), 0o666)
             except (KeyboardInterrupt, SystemExit):
                 raise
-            except:
+            except:  # noqa
                 logger.warning("Unable to write cache file "
                                "{0}".format(filepath))
-        except:
+        except:  # noqa
             raise
 
         if getcpath is False:

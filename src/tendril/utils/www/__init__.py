@@ -82,16 +82,16 @@ mechanism to maintain a cache of full responses received.
 
 """
 
-from .helpers import strencode
+from .helpers import strencode  # noqa
 
 # Bare urllib based access
-from .bare import urlopen
-from .bare import cached_fetcher
-from .bare import get_soup
+from .bare import urlopen           # noqa
+from .bare import cached_fetcher    # noqa
+from .bare import get_soup          # noqa
 
 # Requests based access
-from .req import get_session
-from .req import get_soup_requests
+from .req import get_session        # noqa
+from .req import get_soup_requests  # noqa
 
 # suds based SOAP access
-from .soap import get_soap_client
+from .soap import get_soap_client   # noqa

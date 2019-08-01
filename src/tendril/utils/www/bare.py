@@ -165,7 +165,7 @@ class WWWCachedFetcher(CacheBase):
 
         """
         # Use MD5 hash of the URL as the filename
-        if six.PY3 or (six.PY2 and isinstance(url, unicode)):
+        if six.PY3 or (six.PY2 and isinstance(url, unicode)):  # noqa
             filepath = md5(url.encode('utf-8')).hexdigest()
         else:
             filepath = md5(url).hexdigest()
@@ -222,4 +222,3 @@ def get_soup(url):
         return None
     soup = BeautifulSoup(page, 'lxml')
     return soup
-
