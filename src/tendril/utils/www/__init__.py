@@ -29,7 +29,7 @@ proxies and caching is implemented.
 This module provides three main approaches to handling access to internet
 resources :
 
-.. rubric:: urllib based access (:mod:``tendril.utils.www.bare``)
+.. rubric:: urllib based access (:mod:`tendril.utils.www.bare`)
 
 .. autosummary::
 
@@ -37,14 +37,14 @@ resources :
     get_soup
     cached_fetcher
 
-.. rubric:: requests based access (:mod:``tendril.utils.www.req``)
+.. rubric:: requests based access (:mod:`tendril.utils.www.req`)
 
 .. autosummary::
 
     get_soup_requests
     get_session
 
-.. rubric:: suds based SOAP access (:mod:``tendril.utils.www.soap``)
+.. rubric:: suds based SOAP access (:mod:`tendril.utils.www.soap`)
 
 .. autosummary::
 
@@ -65,7 +65,7 @@ folder. The effect of this caching is far more apparent when a replicator
 cache is also used.
 
 Redirect caching is only supported by the urllib based backend
-(:mod:``tendril.utils.www.bare``), and is likely going to be phased out
+(:mod:`tendril.utils.www.bare`), and is likely going to be phased out
 entirely in the future.
 
 .. rubric:: Full Response Caching
