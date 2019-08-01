@@ -167,8 +167,6 @@ SOAP_CACHE = os.path.join(INSTANCE_CACHE, 'soapcache')
 
 _internet_connected = False
 
-__version__ = '0.1.2'
-
 
 def _get_http_proxy_url():
     """
