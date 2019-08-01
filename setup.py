@@ -27,6 +27,7 @@ def read(fname):
         content += line
     return content
 
+
 import sys
 if sys.version_info > (3, 0):
     suds = 'suds-py3'
@@ -42,6 +43,7 @@ core_dependencies = [
     'beautifulsoup4',
     'cachecontrol[filecache]',
     'requests',
+    'bs4',
     suds,
     'fs==0.5.4',
 ]
