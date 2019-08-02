@@ -36,7 +36,8 @@ else:
 
 
 core_dependencies = [
-    'tendril-utils-core>=0.1.12',
+    'tendril-utils-core',
+    'tendril-utils-fsutils',
     'tendril-config>=0.1.6',
     'six',
     'lxml',

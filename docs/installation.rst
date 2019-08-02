@@ -27,6 +27,7 @@ You will have to ensure the following dependencies are installed and available
 in your python environment by whatever means you usually use.
 
     - tendril-utils-core
+    - tendril-utils-fsutils
     - tendril-config
     - six
     - lxml
