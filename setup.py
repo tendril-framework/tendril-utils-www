@@ -44,9 +44,10 @@ core_dependencies = [
     'beautifulsoup4',
     'cachecontrol[filecache]',
     'requests',
+    'httpx',
     'bs4',
+    'fs',
     suds,
-    'fs==0.5.4',
 ]
 
 install_requires = core_dependencies + ['wheel']

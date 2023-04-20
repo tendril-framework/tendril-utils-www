@@ -51,9 +51,21 @@ config_elements_proxy = [
 ]
 
 
+config_elements_ssl = [
+    ConfigOption(
+        'CA_BUNDLE',
+        "None",
+        "Path to a custom CA certificate bundle to use. This is "
+        "presently only used by the httpx backend"
+    ),
+]
+
+
 def load(manager):
     logger.debug("Loading {0}".format(__name__))
     manager.load_elements(config_elements_network_caching,
                           doc="Network Caching Behavior Configuration")
     manager.load_elements(config_elements_proxy,
                           doc="Network Proxy Configuration")
+    manager.load_elements(config_elements_ssl,
+                          doc="SSL Client Configuration")

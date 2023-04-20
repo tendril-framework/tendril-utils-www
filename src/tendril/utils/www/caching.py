@@ -32,8 +32,8 @@ import time
 import codecs
 import tempfile
 
-from fs.opener import fsopendir
-from fs.utils import copyfile
+from fs import open_fs
+from fs.copy import copy_file
 from fs.osfs import OSFS
 from tendril.utils.fsutils import temp_fs
 from tendril.config import INSTANCE_CACHE
@@ -63,7 +63,7 @@ class CacheBase(object):
         with file encoding on a somewhat case-by-case basis, until the
         overall encoding problems can be ironed out.
         """
-        self.cache_fs = fsopendir(cache_dir, create_dir=True)
+        self.cache_fs = open_fs(cache_dir, create=True)
 
     def _get_filepath(self, *args, **kwargs):
         """
@@ -180,29 +180,27 @@ class CacheBase(object):
 
         logger.debug("Cache MISS")
         data = self._get_fresh_content(*args, **kwargs)
+
+        sdata = self._serialize(data)
+        fd, temppath = tempfile.mkstemp()
+        fp = os.fdopen(fd, 'wb')
+        fp.write(sdata)
+        fp.close()
+        logger.debug("Creating new cache entry")
+        # This can be pretty expensive if the move is across a real
+        # filesystem boundary. We should instead use a temporary file
+        # in the cache_fs itself
         try:
-            sdata = self._serialize(data)
-            fd, temppath = tempfile.mkstemp()
-            fp = os.fdopen(fd, 'wb')
-            fp.write(sdata)
-            fp.close()
-            logger.debug("Creating new cache entry")
-            # This can be pretty expensive if the move is across a real
-            # filesystem boundary. We should instead use a temporary file
-            # in the cache_fs itself
-            try:
-                copyfile(temp_fs, temp_fs.unsyspath(temppath),
-                         self.cache_fs, filepath)
-                if isinstance(self.cache_fs, OSFS):
-                    # TODO Refine permissions
-                    os.chmod(self.cache_fs.getsyspath(filepath), 0o666)
-            except (KeyboardInterrupt, SystemExit):
-                raise
-            except:  # noqa
-                logger.warning("Unable to write cache file "
-                               "{0}".format(filepath))
-        except:  # noqa
+            copy_file(temp_fs, temp_fs.unsyspath(temppath),
+                      self.cache_fs, filepath)
+            if isinstance(self.cache_fs, OSFS):
+                # TODO Refine permissions
+                os.chmod(self.cache_fs.getsyspath(filepath), 0o666)
+        except (KeyboardInterrupt, SystemExit):
             raise
+        except:  # noqa
+            logger.warning("Unable to write cache file "
+                           "{0}".format(filepath))
 
         if getcpath is False:
             return data

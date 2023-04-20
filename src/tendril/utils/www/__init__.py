@@ -84,14 +84,17 @@ mechanism to maintain a cache of full responses received.
 
 from .helpers import strencode  # noqa
 
-# Bare urllib based access
+# Bare urllib based client
 from .bare import urlopen           # noqa
 from .bare import cached_fetcher    # noqa
 from .bare import get_soup          # noqa
 
-# Requests based access
+# Requests based client
 from .req import get_session        # noqa
 from .req import get_soup_requests  # noqa
 
-# suds based SOAP access
+# suds based SOAP client
 from .soap import get_soap_client   # noqa
+
+# httpx based async client
+from .hx import async_client        # noqa
