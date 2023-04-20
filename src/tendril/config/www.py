@@ -58,6 +58,13 @@ config_elements_ssl = [
         "Path to a custom CA certificate bundle to use. This is "
         "presently only used by the httpx backend"
     ),
+    ConfigOption(
+        'SSL_NOVERIFY_HOSTS',
+        "[]",
+        "List of domains in the form 'https://<domain>' for which "
+        "SSL verification is to be skipped. This is intended for "
+        "development purposes only."
+    ),
 ]
 
 

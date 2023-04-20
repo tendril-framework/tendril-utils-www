@@ -39,6 +39,9 @@ using the other backend can be gradually moved here.
 from contextlib import asynccontextmanager
 from httpx import AsyncClient
 from .ssl import ssl_context
+
+from tendril.config import SSL_NOVERIFY_HOSTS
+
 from tendril.utils import log
 logger = log.get_logger(__name__, log.DEFAULT)
 
@@ -71,6 +74,9 @@ async def async_client(*args, **kwargs):
                     "specify a custom SSL context to manage self-signed "
                     "certificate verification. Merging the two contexts "
                     "is not presently implemented")
+        elif 'base_url' in kwargs.keys() and kwargs['base_url'] in SSL_NOVERIFY_HOSTS:
+            logger.info(f"SSL verification disabled for httpx client to {kwargs['base_url']}")
+            kwargs['verify'] = False
         else:
             kwargs['verify'] = ssl_context
         async with AsyncClient(*args, **kwargs) as client:
