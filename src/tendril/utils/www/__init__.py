@@ -97,4 +97,5 @@ from .req import get_soup_requests  # noqa
 from .soap import get_soap_client   # noqa
 
 # httpx based async client
-from .hx import async_client        # noqa
+from .hx import async_client         # noqa
+from .hx import with_async_client_cl # noqa

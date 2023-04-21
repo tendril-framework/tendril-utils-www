@@ -36,6 +36,7 @@ using the other backend can be gradually moved here.
 """
 
 
+from functools import wraps
 from contextlib import asynccontextmanager
 from httpx import AsyncClient
 from .ssl import ssl_context
@@ -83,3 +84,40 @@ async def async_client(*args, **kwargs):
             yield client
     finally:
         await client.aclose()
+
+
+def with_async_client_cl(**client_kwargs):
+    """
+        Application executable code will typically only have to interact with this
+        function or the :func:`async_client` ``contextmanager``. The
+        :func:`with_async_client_cl` decorator is intended to decorate instance methods
+        which require an async client and may be part of a large transaction.
+
+        Such a function would accept 'client' only as a keyword argument
+        ``client``, which can be an async client (created by :func:`async_client`)
+        provided by the caller. If ``client`` is ``None``, this decorator creates
+        a new client with the provided parameters  and calls the decorated
+        function using it.
+
+        .. seealso:: :func:`async_client`
+
+        """
+    def decorator(func):
+        @wraps(func)
+        async def inject_client(self, *args, **kwargs):
+            client = kwargs.get('client', None)
+            if client is None:
+                ckw = {}
+                if hasattr(self, '_async_http_client_args'):
+                    ckw.update(self._client_args())
+                ckw.update(client_kwargs)
+                print("Using client kwargs", ckw)
+                async with async_client(**ckw) as c:
+                    kwargs['client'] = c
+                    result = await func(self, *args, **kwargs)
+                    return result
+            else:
+                result = await func(self, *args, **kwargs)
+                return result
+        return inject_client
+    return decorator
