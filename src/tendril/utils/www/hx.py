@@ -109,7 +109,7 @@ def with_async_client_cl(**client_kwargs):
             if client is None:
                 ckw = {}
                 if hasattr(self, '_async_http_client_args'):
-                    ckw.update(self._client_args())
+                    ckw.update(self._async_http_client_args())
                 ckw.update(client_kwargs)
                 async with async_client(**ckw) as c:
                     kwargs['client'] = c
