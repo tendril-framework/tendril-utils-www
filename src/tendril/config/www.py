@@ -10,8 +10,10 @@ depends = ['tendril.config.core']
 config_elements_network_caching = [
     ConfigOption(
         'ENABLE_REDIRECT_CACHING',
-        "True",
-        "Whether or not to cache 301 and 302 redirects."
+        "False",
+        "Whether or not to cache 301 and 302 redirects. "
+        "This probably works just fine, but treat it as a largely "
+        "deprecated feature."
     ),
     ConfigOption(
         'MAX_AGE_DEFAULT',
