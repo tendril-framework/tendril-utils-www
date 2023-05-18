@@ -46,17 +46,18 @@ logger = log.get_logger(__name__, log.WARNING)
 
 REDIR_CACHE_FILE = os.path.join(INSTANCE_CACHE, 'redirects.p')
 
-try:
-    with open(REDIR_CACHE_FILE, "rb") as rdcf:
-        redirect_cache = pickle.load(rdcf)
-    logger.info('Loaded Redirect Cache from file')
-except EOFError:
-    os.remove(REDIR_CACHE_FILE)
-    redirect_cache = {}
-    logger.warning('Discarded Corrupt Redirect Cache')
-except (IOError, FileNotFoundError):
-    redirect_cache = {}
-    logger.info('Created new Redirect Cache')
+if ENABLE_REDIRECT_CACHING:
+    try:
+        with open(REDIR_CACHE_FILE, "rb") as rdcf:
+            redirect_cache = pickle.load(rdcf)
+        logger.info('Loaded Redirect Cache from file')
+    except EOFError:
+        os.remove(REDIR_CACHE_FILE)
+        redirect_cache = {}
+        logger.warning('Discarded Corrupt Redirect Cache')
+    except (IOError, FileNotFoundError):
+        redirect_cache = {}
+        logger.info('Created new Redirect Cache')
 
 
 def dump_redirect_cache():
@@ -70,7 +71,10 @@ def dump_redirect_cache():
         logger.info('Dumping Redirect Cache to file')
 
 
-DUMP_REDIR_CACHE_ON_EXIT = True
+if ENABLE_REDIRECT_CACHING:
+    DUMP_REDIR_CACHE_ON_EXIT = True
+else:
+    DUMP_REDIR_CACHE_ON_EXIT = False
 
 if ENABLE_REDIRECT_CACHING is True:
     atexit.register(dump_redirect_cache)
