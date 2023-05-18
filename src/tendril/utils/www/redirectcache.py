@@ -54,7 +54,7 @@ except EOFError:
     os.remove(REDIR_CACHE_FILE)
     redirect_cache = {}
     logger.warning('Discarded Corrupt Redirect Cache')
-except IOError:
+except (IOError, FileNotFoundError):
     redirect_cache = {}
     logger.info('Created new Redirect Cache')
 
