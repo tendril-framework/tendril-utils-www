@@ -47,6 +47,7 @@ logger = log.get_logger(__name__, log.WARNING)
 REDIR_CACHE_FILE = os.path.join(INSTANCE_CACHE, 'redirects.p')
 
 if ENABLE_REDIRECT_CACHING:
+    logger.info("Initializing Redirect Caching")
     try:
         with open(REDIR_CACHE_FILE, "rb") as rdcf:
             redirect_cache = pickle.load(rdcf)
@@ -58,6 +59,8 @@ if ENABLE_REDIRECT_CACHING:
     except (IOError, FileNotFoundError):
         redirect_cache = {}
         logger.info('Created new Redirect Cache')
+else:
+    redirect_cache = None
 
 
 def dump_redirect_cache():
